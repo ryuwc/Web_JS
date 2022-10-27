@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>홀수 짝수? 색깔바꾸기</title>
+</head>
+<body>
+  <h1>숫자를 입력하세요</h1>
+  <div>
+    <input type="text" id="input_number">
+    <button id="btn_submit">제출</button>
+    <button id="btn_chCor">색깔바꾸기</button>
+  </div>
+  <h1 id="result"></h1>
+
+  <script>
+
+    const cor_array = ['red', 'green', 'blue', 'yellow', 'pink']
+    let cor_idx = 0
+
+    const w_btn_submit = document.querySelector('#btn_submit')
+    const w_btn_chCor = document.querySelector('#btn_chCor')
+    const w_input = document.querySelector('#input_number')
+    const w_h1_result = document.querySelector('#result')
+
+    /*
+     n이 짝수면 true, 아니면 false 
+    */
+    const is_Even = (n) => {
+      if (n % 2 == 0) {
+        return true
+      }else {
+        return false
+      }
+    }
+
+    w_btn_submit.addEventListener('click', () => {
+      console.log('버튼이 눌렸다!')
+
+      const temp = parseInt(w_input.value)
+      if (!temp) {
+        w_h1_result.innerText = '숫자를 입력해주세요.'
+      } else {
+        let dicision = '홀수'
+        if (is_Even(temp) === true) {
+          dicision = '짝수'
+        }
+        w_h1_result.innerText = `${temp} <- ${dicision}`
+      }
+      w_input.value = ''
+      w_input.focus()
+    })
+
+    w_btn_chCor.addEventListener('click', () => {
+      cor_idx = (cor_idx+1)%cor_array.length
+      console.log('현재 색은' + cor_array[cor_idx])
+      w_h1_result.style.color = cor_array[cor_idx]
+    })
+
+  </script>
+</body>
+</html>
